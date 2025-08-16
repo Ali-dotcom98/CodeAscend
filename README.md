@@ -1,1 +1,49 @@
-# CodeAscend
+## 🏆 CodeAscend
+
+**CodeAscend** is an online coding competition platform where programmers can solve challenges, compete in real-time contests, and climb the leaderboard while sharpening their problem-solving skills.
+
+---
+
+## 🚀 Features
+
+### 🎯 Coding Challenges
+- Wide variety of problems from beginner to expert level.
+- Real-time **submissions and scoring system**.
+- Detailed problem statements with examples and constraints.
+
+### ⚡ Live Competitions
+- Host **timed coding contests** with automated evaluation.
+- Instant ranking updates on the **leaderboard**.
+- Fair play detection to ensure **cheating-free contests**.
+
+### 📊 Leaderboard
+- Compete with friends and global coders.
+- Track your progress with **points, badges, and ranks**.
+- See performance analytics to identify strengths and weaknesses.
+
+
+
+---
+## 🛠️ Tech Stack
+- **Frontend:** React.js (Tailwind CSS for styling)
+- **Backend:** Node.js, Express.js , Judge0
+- **Database:** MongoDB
+- **Authentication:** JWT
+---
+
+## 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/YourUsername/CodeAscend
+
+# Navigate into the project folder
+cd CodeAscend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
