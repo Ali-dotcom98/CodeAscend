@@ -35,7 +35,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/YourUsername/CodeAscend
+git clone https://github.com/Ali-dotcom98/CodeAscend
 
 # Navigate into the project folder
 cd CodeAscend
