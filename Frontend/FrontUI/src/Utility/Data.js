@@ -20,6 +20,12 @@ export const SIDE_MENU_DATA = [
         icon: LuLayoutDashboard,
         path: "/Instructor/Dashboard",
     },
+    {
+        id: "05",
+        label: "Create Challenge",
+        icon: LuLayoutDashboard,
+        path: "/Instructor/Create",
+    },
 
     {
         id: "02",
