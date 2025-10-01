@@ -6,7 +6,7 @@ import SideBar from '../Pages/Students/Components/SideBar'
 const DefaultLayout = () => {
    return (
     <div className='flex min-h-screen bg-slate-50'>
-        <div className='w-[20%] border'>
+        <div className='w-[20%] '>
           <SideBar/>
         </div>
         <div className='w-[80%]'>
