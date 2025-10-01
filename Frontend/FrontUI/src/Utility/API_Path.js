@@ -10,6 +10,7 @@ export const API_PATHS = {
     CHALLENGE: {
         CREATE: "/Chlg/Create",
         GET_ALL: "/Chlg/GetAll",
+        GET_ALL_DASHBOARD: "/Chlg/GetDashboard",
         GET_BY_ID: (id) => `/Chlg/GetAll/${id}`,
         GET_PUBLIC_CHALLENGE: "/Chlg/GetAllWithPublic",
         GET_LEADERBOARD: "/Chlg/GetLeaderBoardData",
