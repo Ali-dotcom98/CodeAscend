@@ -77,6 +77,21 @@ route.get("/GetAll", Protect, async (req, res) => {
     }
 })
 
+route.get("/GetDashboard", Protect, async (req, res) => {
+    try {
+        const status = req.user.status;
+        if (status == "Student")
+            return res.status(401).json({ message: "Student are Not Allowed" })
+
+        const NumberOfChallengeCreated = await Challenge_Model.find({ UserID: req.user._id }).limit(3).sort({ createdAt: -1 })
+        if (!NumberOfChallengeCreated)
+            return res.send("Looks like no challenges have been created yet!")
+        res.send(NumberOfChallengeCreated)
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+})
+
 route.get("/GetAllWithPublic", Protect, async (req, res) => {
     try {
         const status = req.user.status;
@@ -248,6 +263,67 @@ route.put("/:id/upload-image", (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 })
+
+
+route.get("/ak", Protect, async (req, res) => {
+    try {
+        const instructorId = req.user._id;
+
+        // get all challenges created by this instructor
+        const challenges = await Challenge_Model.find({ UserID: instructorId });
+
+        // KPI 1: total challenges created
+        const totalChallenges = challenges.length;
+
+        // KPI 2: total unique active students
+        const studentSet = new Set();
+
+        // KPI 3: submissions per day
+        const submissionsMap = {};
+
+        // KPI 4: problems by difficulty
+        const difficultyCount = { Easy: 0, Medium: 0, Hard: 0 };
+
+        challenges.forEach(ch => {
+            // Count students
+            if (Array.isArray(ch.SubmittedBy)) {
+                ch.SubmittedBy.forEach(s => {
+                    studentSet.add(s.toString());
+
+                    // Count submissions per day (using createdAt)
+                    const date = new Date(ch.createdAt).toISOString().slice(0, 10);
+                    submissionsMap[date] = (submissionsMap[date] || 0) + 1;
+                });
+            }
+
+            // Count by difficulty
+            const level = ch.difficulty;
+            if (level && difficultyCount[level] !== undefined) {
+                difficultyCount[level]++;
+            }
+        });
+
+        const activeStudents = studentSet.size;
+
+        // Convert submissions map to sorted array
+        const submissionsPerDay = Object.keys(submissionsMap)
+            .sort()
+            .map(date => ({ date, count: submissionsMap[date] }));
+
+        // Send response
+        res.json({
+            totalChallenges,
+            activeStudents,
+            submissionsPerDay,
+            problemsByDifficulty: difficultyCount
+        });
+
+    } catch (error) {
+        console.error("Error fetching instructor KPIs:", error);
+        res.status(500).json({ message: "Server error while fetching dashboard data" });
+    }
+});
+
 
 
 
