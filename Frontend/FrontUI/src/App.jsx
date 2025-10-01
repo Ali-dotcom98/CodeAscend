@@ -18,6 +18,7 @@ import Leaderboard from './Pages/Students/Leaderboard'
 import CreatChallengeForm from './Pages/Instructor/CreatChallengeForm'
 import ManagaCometition from './Pages/Instructor/ManagaCometition'
 import { ToastContainer } from 'react-toastify'
+import CreateChallenge from "./Pages/Instructor/CreateChallenge"
   const App = () => {
       
     return (
@@ -36,6 +37,7 @@ import { ToastContainer } from 'react-toastify'
                 
                 >
                 <Route path='Dashboard' element={<Dashboard/>}/>
+                <Route path='Create' element={<CreateChallenge/>}/>
                 <Route path='Manage' element={<ManagaCometition/>}/>
                 <Route path='Leaderboard' element={<Leaderboard/>}/>
               </Route>
