@@ -38,7 +38,7 @@ return (
             <th className='py-3 px-4 text-gray-800 font-medium text-[13px]'>Due Date</th>
             
             <th className='py-3 px-4 text-gray-800 font-medium text-[13px]'>Total Submission</th>
-            <th className='py-3 px-4 text-gray-800 font-medium text-[13px] hidden md:table-cell'>Created On</th>
+            <th className='py-3 px-4 text-gray-800 font-medium text-[13px] hidden md:table-cell'>Update On</th>
         </tr>
         </thead>
         <tbody>
@@ -78,7 +78,7 @@ return (
 
             
             <td className='p-4 text-gray-700 text-[13px] text-nowrap hidden md:table-cell'>
-                {item.createdAt ? moment(item.createdAt).format("Do MMM YYYY") : "N/A"}
+                {item.updatedAt ? moment(item.updatedAt).format("Do MMM YYYY") : "N/A"}
             </td>
             </tr>
         ))}
