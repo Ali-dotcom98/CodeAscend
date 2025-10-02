@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const ChallengeCard = ({ imgurl, title, lastUpdated, onSelect, DeletedArray , ID }) => {  
+const ChallengeCard = ({at,lastcreated, imgurl, title, lastUpdated, onSelect, DeletedArray , ID }) => {  
     
     return(
         <div
@@ -21,7 +21,13 @@ const ChallengeCard = ({ imgurl, title, lastUpdated, onSelect, DeletedArray , ID
             </div>
             <div className='w-full bg-white px-4 py-3'>
                 <h3 className="text-sm font-medium truncate overflow-hidden whitespace-nowrap">{title}</h3>
-                <p className="text-xs font-medium text-gray-500 mt-0.5">Last updated: {lastUpdated}</p>
+                {
+                    at === "Dashboard"?
+                        <p className="text-xs font-medium text-gray-500 mt-0.5">Created At: {lastcreated}</p>
+                    :
+                        <p className="text-xs font-medium text-gray-500 mt-0.5">Last updated: {lastUpdated}</p>
+
+                }
             </div>
         </div>
     )
