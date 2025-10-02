@@ -8,7 +8,8 @@ import Table1 from "../../Components/Table1";
 
 import { LineChart } from "@mui/x-charts/LineChart";
 import { BarChart } from "@mui/x-charts/BarChart";
-
+import ChallengeCard from '../../Components/Cards/ChallengeCard';
+import moment from 'moment';
 const Dashboard = () => {
   const [Table, setTable] = useState([]);
   const [demoData, setdemoData] = useState({
@@ -17,6 +18,10 @@ const Dashboard = () => {
     submissionsPerDay: [],
     problemsByDifficulty: {}
   });
+  console.log(demoData);
+  
+
+  const [AllChallenge, setAllChallenge] = useState([])
 
   const navigator = useNavigate();
 
@@ -24,6 +29,7 @@ const Dashboard = () => {
     try {
       const result = await AxiosInstance.get(API_PATHS.CHALLENGE.GET_ALL_DASHBOARD);
       setTable(result.data);
+      setAllChallenge(result.data)
     } catch (error) {
       console.log(error);
     }
@@ -37,6 +43,7 @@ const Dashboard = () => {
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
     FetchContent();
@@ -46,9 +53,9 @@ const Dashboard = () => {
   const HandleClick = () => navigator("/Instructor/Create");
 
   return (
-    <div className="p-2 space-y-6 bg-gray-50 min-h-screen translate-y-3">
+    <div className="p-2 space-y-6 bg-gray-50 min-h-screen translate-y-3 font-urbanist">
       <div className="grid grid-cols-5 gap-2">
-        <div className="col-span-2 p-3">
+        <div className="col-span-2 px-3">
           <div className='bg-[#6c63ff] h-32 mb-3 relative overflow-hidden rounded-md font-urbanist'>
             <div className='absolute size-56 rounded-full -left-12 top-3 bg-white' />
             <div className='absolute left-0 top-2 z-0 translate-x-3'>
@@ -87,58 +94,79 @@ const Dashboard = () => {
           </div>
 
           <div className='flex flex-col gap-3 mt-3'>
-            <div className="bg-white p-6 rounded-2xl">
-              <BarChart
-                xAxis={[
-                  {
-                    data: Object.keys(demoData.problemsByDifficulty || {}),
-                    scaleType: "band",
-                  },
-                ]}
-                series={[
-                  {
-                    data: Object.values(demoData.problemsByDifficulty || {}),
-                    color: "#6c63ff", 
-                  },
-                ]}
-                height={250}
-              
-              sx={{
-                "& .MuiBarElement-root": {
-                  ry: 6, 
-                },
-              }}
+            <p className=' w-fit text-[12px] font-medium text-white bg-[#6c63ff] px-3 py-0.5 rounded mt-1'>
+              Submissions Per Day
+            </p>
+            <div className="bg-white py-3 px-1 rounded-2xl">
+              <LineChart
+                  
+                  xAxis={[
+                    {
+                      data:
+                        demoData?.submissionsPerDay?.map(item =>
+                          moment(item.date).format("Do MMM")
+                        ) || [],
+                      scaleType: "point",
+                    },
+                  ]}
+                  series={[
+                    {
+                      data: demoData?.submissionsPerDay?.map(item => item.count) || [],
 
+                      color: "#6c63ff",
+                    },
+                  ]}
+                  height={200}
+                  grid={{ vertical: true, horizontal: true }}
               />
             </div>
           </div>
         </div>
 
-        <div className="col-span-3 p-3">
-          <Table1 tableData={Table} />
-          <div className="bg-white p-6 rounded-2xl">
-              <LineChart
-  xAxis={[
-    {
-      data: demoData?.submissionsPerDay?.map(item => item.date) || [],
-      scaleType: "point",
-    },
-  ]}
-  series={[
-    {
-      data: demoData?.submissionsPerDay?.map(item => item.count) || [],
-      label: "Submissions Per Day",
-      area: true,
-      curve: "monotoneX",
-      color: "#6c63ff",
-    },
-  ]}
-  height={210}
-/>
+        <div className="col-span-3 px-3 w-full flex flex-col gap-5">
+          <div className='flex flex-col gap-3'>
+            <p className=' w-fit text-[12px] font-medium text-white bg-[#6c63ff] px-3 py-0.5 rounded mt-1'>
+                  Recently Created 
+            </p>
+            <div className="font-urbanist grid grid-cols-1 md:grid-cols-3 md:gap-2 md:px-0 ">
 
+                {AllChallenge?.map((Challenge) => (
+                  <ChallengeCard
+                    key={Challenge?._id}
+                    at = "Dashboard"
+                    imgurl={Challenge?.thumbnailLink || null}
+                    title={Challenge?.title || "Untitled Resume"}
+                    lastUpdated={
+                      Challenge?.updatedAt
+                        ? moment(Challenge.updatedAt).format("Do MMM YYYY")
+                        : "Unknown"
+                    }
+                    lastcreated={
+                      Challenge?.createdAt
+                        ? moment(Challenge.createdAt).format("Do MMM YYYY")
+                        : "Unknown"
+                    }
+                    onSelect={() => navigator(`/Instructor/Challenge/${Challenge._id}` )}
+                  />
+                ))}
+            </div>
           </div>
+          <div className='flex flex-col gap-3'>
+              <p className=' w-fit text-[12px] font-medium text-white bg-[#6c63ff] px-3 py-0.5 rounded mt-1'>
+                  Challenge Overview 
+              </p>
+              <div>
+                <Table1 tableData={Table} />
+              </div>
+          </div>
+         
         </div>
+      
+        
       </div>
+
+      
+
     </div>
   );
 };
