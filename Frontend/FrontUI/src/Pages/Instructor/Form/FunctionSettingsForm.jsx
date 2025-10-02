@@ -69,7 +69,7 @@ const FunctionSettingsForm = ({language,functionSignature,startTime,duration,isP
                      <div className='flex flex-col my-2 space-y-1.5'>
                         <label htmlFor="" className="font-medium">ReturnType</label>
                         <select  className='p-3 bg-slate-50 relative outline-none rounded-md' name="" value={outputType} onChange={({target})=>UpdateSectionPro("outputType", target.value)} id="">
-                            <option value="boolean++">Boolean</option>
+                            <option value="boolean">Boolean</option>
                             <option value="int">Integer</option>
                             <option value="long">Long</option>
                             <option value="String">String</option>
