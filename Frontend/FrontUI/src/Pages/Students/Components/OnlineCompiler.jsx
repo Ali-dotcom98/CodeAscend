@@ -10,6 +10,7 @@ import RenderFrom from '../../Instructor/RenderForm/RenderFrom';
 import AxiosInstance from "../../../Utility/AxiosInstance"
 import { API_PATHS } from '../../../Utility/API_Path';
 import {useNavigate} from 'react-router-dom'
+import { boilerplates } from '../../../Utility/BoilerPlate';
 
 
 const OnlineCompiler = ({CompetitonDetail , ActualSubmissionData}) => { 
@@ -102,54 +103,19 @@ const handleSubmit = async()=>{
 
 
 
-  const setBoilerCode = (label) => {
-    if(CompetitonDetail)
-    {
-      switch (CompetitonDetail.defaultBoilercode.language) {
-            case "C++":
-              return setCode(`#include <iostream>
-        using namespace std;
+  const setBoilerCode = () => {
+  if (!CompetitonDetail) return;
 
-        int main() {
-            
-            return 0;
-        }`);
+  const lang = CompetitonDetail.defaultBoilercode.language;
+  const template = boilerplates[lang];
 
-            case "Python":
-              return setCode(`# Your code here`);
-
-            case "Java":
-              return setCode(`
-import java.util.Scanner;
-public class Main { 
-    public static ${CompetitonDetail.defaultBoilercode.outputType} ${CompetitonDetail.functionSignature}(${CompetitonDetail.defaultBoilercode.inputType} n) {
-    // Write your login here
-    return true;
-}
-
-public static void main(String[] args) {
-  Scanner sc = new Scanner(System.in);
-  String input = sc.nextLine().trim().toLowerCase();
-  System.out.println(${CompetitonDetail.functionSignature}(input));
-  sc.close();
-
+  if (typeof template === 'function') {
+    setCode(template(CompetitonDetail));
+  } else {
+    setCode(template);
   }
-}`);
-
-            case "C":
-              return setCode(`#include <stdio.h>
-
-        int main() {
-            
-            return 0;
-        }`);
-
-            default:
-              break;
-          }
-    }
-  
 };
+
 
   const handleLanguageChange = (id, label) => {
     
