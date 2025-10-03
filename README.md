@@ -1,4 +1,4 @@
-## 🏆 Code Ascend
+## 🏆 CodeAscend
 
 **CodeAscend** is an online coding competition platform where programmers can solve challenges, compete in real-time contests, and climb the leaderboard while sharpening their problem-solving skills.
 
