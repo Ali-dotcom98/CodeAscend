@@ -46,7 +46,7 @@ npm install
 # Start the development server
 npm run dev
 ```
-![Untitled (1) (1)](https://github.com/Ali-dotcom98/CodeAscend/blob/main/CodeAscend2.png?raw=true)
+![Untitled (1) (1)](https://github.com/Ali-dotcom98/CodeAscend/blob/main/CodeAscend_2.png?raw=true)
 
 
 https://github.com/user-attachments/assets/fdf958bd-7280-4d95-9503-e4eb314aa1a1
