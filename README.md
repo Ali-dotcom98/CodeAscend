@@ -6,17 +6,17 @@
 
 ## 🚀 Features
 
-### 🎯 Coding Challenges
+### Coding Challenges
 - Wide variety of problems from beginner to expert level.
 - Real-time **submissions and scoring system**.
 - Detailed problem statements with examples and constraints.
 
-### ⚡ Live Competitions
+### Live Competitions
 - Host **timed coding contests** with automated evaluation.
 - Instant ranking updates on the **leaderboard**.
 - Fair play detection to ensure **cheating-free contests**.
 
-### 📊 Leaderboard
+### Leaderboard
 - Compete with friends and global coders.
 - Track your progress with **points, badges, and ranks**.
 - See performance analytics to identify strengths and weaknesses.
