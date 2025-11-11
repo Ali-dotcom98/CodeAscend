@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Features
+## 🌟 Features
 
 ### Coding Challenges
 - Wide variety of problems from beginner to expert level.
